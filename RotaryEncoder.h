@@ -11,16 +11,20 @@
 #include "PinBank.h"
 #include <stdint.h>
 
-class RotaryEncoder {
+class RotaryEncoder : public InterruptListener {
 public:
 	RotaryEncoder(uint8_t pinA, uint8_t pinB, PinBank* pinBank);
-	void callback();
-	int8_t getValue() const;
+	virtual const void handleInterrupt(uint8_t pin, uint8_t value);
+	int getValue() const;
+	void setCap(int minValue, int maxValue);
 private:
+	int cap(int i);
 	uint8_t pinA, pinB;
 	PinBank* pinBank;
 	uint8_t lastValueA;
-	uint8_t value;
+	int value;
+	int minValue, maxValue;
+	bool isCapped;
 };
 
 #endif /* ROTARYENCODER_H_ */
