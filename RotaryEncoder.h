@@ -18,6 +18,7 @@ public:
 	int getValue() const;
 	void setValue(int _value);
 	void setCap(int minValue, int maxValue);
+
 private:
 	int cap(int i);
 	uint8_t pinA, pinB;
